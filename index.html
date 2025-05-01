@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>عيد ميلاد منة 🎉</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(to right, #ffdde1, #ee9ca7);
+      color: white;
+      text-align: center;
+      overflow-x: hidden;
+    }
+
+    .section { display: none; padding: 20px; animation: fadeIn 1.5s ease-in-out; }
+    .section.active { display: block; }
+
+    h1 { font-size: 36px; margin-top: 20px; }
+    p { font-size: 20px; margin: 15px 0; }
+
+    .image-container, .slide-img {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin: 20px auto;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    .image-container img, .slide-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .slide-img {
+      border-radius: 10px;
+      width: 250px;
+      height: 180px;
+    }
+
+    .image-slide {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .btn {
+      background: white;
+      color: #ff69b4;
+      padding: 12px 25px;
+      font-size: 18px;
+      border: none;
+      border-radius: 10px;
+      margin: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #ffc0cb;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; } to { opacity: 1; }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    @keyframes flyUp {
+      0% { transform: translateY(100px); opacity: 0; }
+      50% { opacity: 1; }
+      100% { transform: translateY(-200px); opacity: 0; }
+    }
+
+    .prayer-text {
+      font-size: 24px;
+      color: #d63384;
+      font-weight: bold;
+      max-width: 90%;
+      margin: 0 auto;
+      animation: flyUp 6s ease-in-out forwards;
+    }
+
+    .surprise-message {
+      font-size: 22px;
+      color: #fff;
+      margin-top: 30px;
+    }
+
+    .audio-control {
+      position: fixed;
+      top: 15px;
+      right: 20px;
+      font-size: 28px;
+      cursor: pointer;
+      z-index: 100;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ترحيب -->
+  <div class="section active" id="welcome">
+    <h1>مرحباً منة! 💖</h1>
+    <p>أنتِ أعز وأقرب صديقة في حياتي، وأتمنى لكِ يوماً جميلاً!</p>
+    <div class="image-container"><img src="oar2.jpg" alt="منة"></div>
+    <p>كل لحظة معكِ هي نعمة! حتى وإن لم يظهر ذلك دائماً ❤️</p>
+    <button class="btn" onclick="showSection('secondPage')">اكتشفي الرحلة ✨</button>
+  </div>
+
+  <!-- الرحلة والصور -->
+  <div class="section" id="secondPage">
+    <p>أنتِ أختي وصديقتي وكل شيء جميل، كل عام وأنتِ بخير!</p>
+    <p>أتمنى لكِ عاماً سعيداً ومليئاً بالنجاح 🤍</p>
+
+    <div class="image-slide">
+      <div class="slide-img"><img src="OIP.jpg" alt="صورة 1"></div>
+      <div class="slide-img"><img src="OIP.webp" alt="صورة 2"></div>
+      <div class="slide-img"><img src="R.jpg" alt="صورة 3"></div>
+    </div>
+
+    <button class="btn" onclick="showSurprise()">هناك مفاجأة  🎁</button>
+    <button class="btn" onclick="showSection('prayerSection')">أمنيتي لكِ في هذا اليوم 💌</button>
+
+    <div class="surprise-message" id="surpriseMessage" style="display: none;">
+      المفاجأة هي: أنا هديتك  امزح😅<br>أعلم أنه شيء بسيط جدًا، لكن أتمنى أن يسعدكِ 💝
+    </div>
+  </div>
+
+  <!-- الدعاء -->
+  <div class="section" id="prayerSection">
+    <div class="prayer-text">
+      اللهم أسعد قلب صديقتي منة سعادةً لا تزول،<br>
+      وارزقها راحة لا تفنى، وحقق لها كل ما تتمنى،<br>
+      واجعل هذا العام عام خير وسعادة وفرح لها 🤲💖<br>
+      أحلى يوم هو يوم 2 مايو 🎂
+    </div>
+    <div class="farewell-message" id="farewellMessage">
+        مع السلامة يا صديقتي 💗
+      </div>
+  </div>
+
+  <!-- صوت دعاء -->
+  <audio id="prayerAudio" loop>
+    <source src="Ggb006gB_y0.mp3" type="audio/mp3">
+  </audio>
+
+  <!-- صوت تحكم -->
+  <div class="audio-control" id="audioControl">🔊</div>
+
+  <script>
+    const sections = document.querySelectorAll('.section');
+    const audioControl = document.getElementById('audioControl');
+    const prayerAudio = document.getElementById('prayerAudio');
+
+    function showSection(id) {
+      sections.forEach(sec => sec.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+
+      // تشغيل الدعاء فقط في قسم الدعاء
+      if (id === 'prayerSection') {
+        prayerAudio.play();
+      } else {
+        prayerAudio.pause();
+      }
+    }
+
+    function showSurprise() {
+      document.getElementById('surpriseMessage').style.display = 'block';
+    }
+
+    audioControl.addEventListener('click', () => {
+      if (prayerAudio.paused) {
+        prayerAudio.play();
+        audioControl.textContent = "🔊";
+      } else {
+        prayerAudio.pause();
+        audioControl.textContent = "🔇";
+      }
+    });
+  </script>
+</body>
+</html>
